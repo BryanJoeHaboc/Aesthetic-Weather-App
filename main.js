@@ -1,16 +1,35 @@
+class ConvertLocToGeoCoor {
+  constructor(location) {
+    this.location = location;
+    this._apiKey = "48964d428f15677ab81748401048bf1c";
+  }
+
+  async _getObj() {
+    return fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${this.location}&limit=1&appid=${this._apiKey}`,
+      { mode: "cors" }
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        return res;
+      });
+  }
+
+  async getCoordinates() {
+    const obj = await this._getObj();
+    return {
+      latitude: obj[0].lat,
+      longitude: obj[0].lon,
+      name: obj[0].name,
+      country: obj[0].country,
+    };
+  }
+}
+
 class Weather {
   constructor(location) {
-    const apiKey = "48964d428f15677ab81748401048bf1c";
-
-    const latLong = fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${this.location}&limit=1&appid=${apiKey}`,
-      { mode: "cors" }
-    ).then((res) => {
-      return res.json();
-    });
-
-    latLong.then((res) => console.log(res));
-
     this.location = location;
   }
 
@@ -34,5 +53,10 @@ class WeatherDisplay {
   static;
 }
 
-const we = new Weather("Manila");
-we.getWeatherDataUsingLoc("Manila").then((res) => console.log(res));
+async function main() {
+  const latlong = new ConvertLocToGeoCoor("Manila");
+  const wat = await latlong.getCoordinates();
+  const we = new Weather("Manila");
+}
+
+main();
