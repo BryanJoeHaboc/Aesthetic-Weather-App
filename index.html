@@ -9,34 +9,57 @@
   </head>
   <body>
     <div class="container background-img">
-      <div class="left-portion"></div>
+      <div class="left-portion">
+        <div class="weather-logo-descrip">
+          <div class="weather-descrip"></div>
+          <div class="weather-main-logo"></div>
+        </div>
+        <div class="weather-place"></div>
+        <div class="weather-date"></div>
+        <div class="weather-time"></div>
+        <div class="weather-search-bar"></div>
+      </div>
       <div class="middle-portion">
         <div class="welcome-note">Hello, How's your day going?</div>
       </div>
-      <div class="right-portion"></div>
+      <div class="right-portion">
+        <div id="feels-like" class="weather-block">
+          <div id="feels-like-icon">
+            <img src="http://openweathermap.org/img/w/01d.png" />
+          </div>
+          <div class="weather-info">
+            <div class="weather-label">Feels Like</div>
+            <div id="feels-like-info"></div>
+          </div>
+        </div>
+        <div id="humidity" class="weather-block">
+          <div id="humidity-icon">
+            <img src="http://openweathermap.org/img/w/01d.png" />
+          </div>
+          <div class="weather-info">
+            <div class="weather-label">Humidity</div>
+            <div id="humidity-info"></div>
+          </div>
+        </div>
+        <div id="wind-speed" class="weather-block">
+          <div id="wind-speed-icon">
+            <img src="http://openweathermap.org/img/w/01d.png" />
+          </div>
+          <div class="weather-info">
+            <div class="weather-label">Wind Speed</div>
+            <div id="wind-speed-info"></div>
+          </div>
+        </div>
+      </div>
       <div class="line-break"></div>
       <div class="bottom-portion">
-        <div class="sun">
-          <p>Sunday</p>
-        </div>
-        <div class="mon">
-          <p>Monday</p>
-        </div>
-        <div class="tue">
-          <p>Tuesday</p>
-        </div>
-        <div class="wed">
-          <p>Wednesday</p>
-        </div>
-        <div class="thu">
-          <p>Thursday</p>
-        </div>
-        <div class="fri">
-          <p>Friday</p>
-        </div>
-        <div class="sat">
-          <p>Saturday</p>
-        </div>
+        <div id="card-1" class="days"></div>
+        <div id="card-2" class="days"></div>
+        <div id="card-3" class="days"></div>
+        <div id="card-4" class="days"></div>
+        <div id="card-5" class="days"></div>
+        <div id="card-6" class="days"></div>
+        <div id="card-7" class="days"></div>
       </div>
     </div>
     <script src="./main.js" />

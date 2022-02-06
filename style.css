@@ -58,6 +58,24 @@ html {
   border: 0.25px solid white;
   /* background-color: green; */
   flex-grow: 1;
+  font-size: 2.25rem;
+  color: white;
+  font-weight: 600;
+}
+
+.right-portion .weather-block {
+  display: flex;
+  margin: 2rem 1rem;
+}
+
+.right-portion .weather-block {
+  display: flex;
+  margin: 2rem 1rem;
+}
+
+.weather-label {
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .bottom-portion {
