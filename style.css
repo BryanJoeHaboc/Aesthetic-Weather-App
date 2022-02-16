@@ -1,3 +1,9 @@
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body,
 html {
   height: 100%;
@@ -5,9 +11,8 @@ html {
   padding: 0;
   font-size: 10px;
   font-family: montserrat, sans-serif;
-}
+  color: white;
 
-.background-img {
   background-image: url(./img/Background.jpg);
   height: 100%;
   background-position: center;
@@ -32,19 +37,59 @@ html {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0px 5rem;
 }
 
 .left-portion {
   min-height: 60%;
   max-width: 20%;
   flex-grow: 1;
-  border: 0.25px solid white;
+  /* border: 0.25px solid white; */
+  font-size: 1.75rem;
   /* background-color: yellow; */
 }
+
+.left-portion .weather-temp {
+  font-size: 5rem;
+}
+
+.left-portion div {
+  margin: 1.25rem 0.5rem;
+}
+
+.left-portion input[type="text"] {
+  padding: 0.6rem;
+  margin-top: 0.8rem;
+  margin-left: 0.5rem;
+  border: none;
+  font-size: 1.5rem;
+  background-color: rgba(255, 0, 0, 0.1);
+  color: white;
+}
+
+.left-portion input[type="text"]:focus {
+  outline: none !important;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+.weather-descrip {
+  margin: 0;
+  border: 0;
+  font-size: 2rem;
+}
+img#weather-logo-today {
+  max-width: 100px;
+  min-height: 100px;
+}
+
 .middle-portion {
   min-height: 60%;
   max-width: 60%;
-  border: 0.25px solid white;
+  /* border: 0.25px solid white; */
   /* background-color: blueviolet; */
   flex-grow: 2;
   display: flex;
@@ -55,17 +100,12 @@ html {
 .right-portion {
   min-height: 60%;
   max-width: 20%;
-  border: 0.25px solid white;
+  /* border: 0.25px solid white; */
   /* background-color: green; */
   flex-grow: 1;
-  font-size: 2.25rem;
+  font-size: 2.75rem;
   color: white;
   font-weight: 600;
-}
-
-.right-portion .weather-block {
-  display: flex;
-  margin: 2rem 1rem;
 }
 
 .right-portion .weather-block {
@@ -81,12 +121,12 @@ html {
 .bottom-portion {
   min-height: 40%;
   max-width: 100%;
-  border: 0.25px solid white;
+  /* border: 0.25px solid white; */
   /* background-color: blue; */
   flex-grow: 1;
   /* flex */
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -99,6 +139,7 @@ html {
 .bottom-portion div {
   height: 15rem;
   width: 12rem;
-  border: 0.5px solid black;
+  /* border: 0.5px solid black; */
   text-align: center;
+  background-color: rgba(255, 0, 0, 0.1);
 }

@@ -8,16 +8,27 @@
     <title>Aesthetic Weather App</title>
   </head>
   <body>
-    <div class="container background-img">
+    <div class="container">
       <div class="left-portion">
         <div class="weather-logo-descrip">
-          <div class="weather-descrip"></div>
-          <div class="weather-main-logo"></div>
+          <div class="weather-descrip">
+            <h1 id="weather-descrip-today"></h1>
+          </div>
+          <div class="weather-main-logo">
+            <img id="weather-logo-today" />
+          </div>
         </div>
+        <div class="weather-temp"></div>
         <div class="weather-place"></div>
         <div class="weather-date"></div>
         <div class="weather-time"></div>
-        <div class="weather-search-bar"></div>
+        <input
+          type="text"
+          class="weather-search-bar"
+          id="weather-searchbar"
+          placeholder="Enter place.."
+        />
+        <button class="search-button">SEARCH</button>
       </div>
       <div class="middle-portion">
         <div class="welcome-note">Hello, How's your day going?</div>
@@ -53,13 +64,41 @@
       </div>
       <div class="line-break"></div>
       <div class="bottom-portion">
-        <div id="card-1" class="days"></div>
-        <div id="card-2" class="days"></div>
-        <div id="card-3" class="days"></div>
-        <div id="card-4" class="days"></div>
-        <div id="card-5" class="days"></div>
-        <div id="card-6" class="days"></div>
-        <div id="card-7" class="days"></div>
+        <div id="card-1" class="days">
+          <p id="card-1-day"></p>
+          <p id="card-1-temp"></p>
+          <img id="card-1-logo" />
+        </div>
+        <div id="card-2" class="days">
+          <p id="card-2-day"></p>
+          <p id="card-2-temp"></p>
+          <img id="card-2-logo" />
+        </div>
+        <div id="card-3" class="days">
+          <p id="card-3-day"></p>
+          <p id="card-3-temp"></p>
+          <img id="card-3-logo" />
+        </div>
+        <div id="card-4" class="days">
+          <p id="card-4-day"></p>
+          <p id="card-4-temp"></p>
+          <img id="card-4-logo" />
+        </div>
+        <div id="card-5" class="days">
+          <p id="card-5-day"></p>
+          <p id="card-5-temp"></p>
+          <img id="card-5-logo" />
+        </div>
+        <div id="card-6" class="days">
+          <p id="card-6-day"></p>
+          <p id="card-6-temp"></p>
+          <img id="card-6-logo" />
+        </div>
+        <div id="card-7" class="days">
+          <p id="card-7-day"></p>
+          <p id="card-7-temp"></p>
+          <img id="card-7-logo" />
+        </div>
       </div>
     </div>
     <script src="./main.js" />

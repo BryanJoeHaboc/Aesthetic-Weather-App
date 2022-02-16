@@ -122,9 +122,45 @@ class WeatherDisplay {
   constructor(weatherData) {
     this.weatherData = weatherData;
     this.timeInstance = new TimeMethods();
+    this.today = this.weatherData[0];
   }
   //NOTE: cant do showLeftPart because of laptop lagging
-  showLeftPart() {}
+  showLeftPart() {
+    console.log(this.today);
+    const weatherLogo = document.querySelector("#weather-logo-today");
+    weatherLogo.setAttribute(
+      "src",
+      `http://openweathermap.org/img/w/${this.today.weather[0].icon}.png`
+    );
+
+    const weatherDescrip = document.querySelector("#weather-descrip-today");
+
+    const fixStrings = this.today.weather[0].description.split(" ");
+    let weatherDescription = "";
+
+    for (let i = 0; i < fixStrings.length; i++) {
+      const dString = fixStrings[i];
+      // console.log(dString);
+      weatherDescription +=
+        dString[0].toUpperCase() + dString.slice(1, dString.length) + " ";
+    }
+
+    weatherDescrip.innerHTML = weatherDescription;
+
+    const tod = this.timeInstance.getTimeOfTheDay();
+
+    document.querySelector(".weather-temp").innerHTML =
+      this.today.temp[tod].toFixed(2) + "\xB0" + "C";
+
+    document.querySelector(".weather-date").innerHTML =
+      new Date().toDateString();
+
+    const timer = setInterval(() => {
+      document.querySelector(".weather-time").innerHTML = new Date()
+        .toTimeString()
+        .split(" ")[0];
+    }, 1000);
+  }
 
   showRightPart() {
     //feels like
@@ -133,15 +169,15 @@ class WeatherDisplay {
     // wind speed
     const feelsLikeDisplay = document.querySelector("#feels-like-info");
     feelsLikeDisplay.innerHTML =
-      this.weatherData[0].feelsLike[
-        this.timeInstance.getTimeOfTheDay()
-      ].toFixed(2) + "\xB0";
+      this.today.feelsLike[this.timeInstance.getTimeOfTheDay()].toFixed(2) +
+      "\xB0" +
+      "C"; //add degree symbol
 
     const humidityDisplay = document.querySelector("#humidity-info");
-    humidityDisplay.innerHTML = this.weatherData[0].humidity + "%";
+    humidityDisplay.innerHTML = this.today.humidity + "%";
 
     const windSpeedDisplay = document.querySelector("#wind-speed-info");
-    windSpeedDisplay.innerHTML = this.weatherData[0].windSpeed + " km/hr";
+    windSpeedDisplay.innerHTML = this.today.windSpeed + " km/hr";
   }
 
   showCards() {
@@ -154,43 +190,46 @@ class WeatherDisplay {
     for (let i = 1; i < this.weatherData.length; i++) {
       const tod = this.timeInstance.getTimeOfTheDay();
 
-      const display = document.getElementById("card-" + i);
+      const dayDisplay = document.querySelector("#card-" + [i] + "-day");
 
-      const dayDisplay = document.createElement("p");
       dayDisplay.innerHTML = this.timeInstance.getNextDay();
 
-      const tempDisplay = document.createElement("p");
-      tempDisplay.innerHTML = this.weatherData[i].temp[tod].toFixed(2) + "\xB0";
+      const tempDisplay = document.querySelector("#card-" + [i] + "-temp");
+      tempDisplay.innerHTML =
+        this.weatherData[i].temp[tod].toFixed(2) + "\xB0" + "C";
       tempDisplay.style.fontSize = "2em";
 
-      // const feelsLikeDisplay = document.createElement("p");
-      // feelsLikeDisplay.innerHTML = this.weatherData[i].feelsLike[tod];
-      // feelsLikeDisplay.style.fontSize = "1.25em";
-
-      const logo = document.createElement("img");
-
-      console.log(this.weatherData[i].weather.icon);
+      const logo = document.querySelector("#card-" + [i] + "-logo");
 
       logo.setAttribute(
         "src",
         `http://openweathermap.org/img/w/${this.weatherData[i].weather[0].icon}.png`
       );
-
-      display.append(dayDisplay);
-      display.append(tempDisplay);
-      display.append(logo);
     }
   }
 }
 
-(async function main() {
-  const latlong = new ConvertLocToGeoCoor("Manila");
-  const geoData = await latlong.getCoordinates();
-  const weatherData = new Weather(geoData);
+function mainLogic() {
+  const location =
+    document.querySelector(".weather-search-bar").value || "Manila,Philippines";
 
-  const weatherDisplay = new WeatherDisplay(
-    await weatherData.getWeatherForecast()
-  );
-  weatherDisplay.showCards();
-  weatherDisplay.showRightPart();
+  console.log(location);
+  const latlong = new ConvertLocToGeoCoor(location);
+  latlong.getCoordinates().then((loc) => {
+    document.querySelector(".weather-place").innerHTML =
+      loc.name + " " + loc.country;
+    const weatherData = new Weather(loc);
+
+    weatherData.getWeatherForecast().then((forecast) => {
+      const weatherDisplay = new WeatherDisplay(forecast);
+      weatherDisplay.showCards();
+      weatherDisplay.showRightPart();
+      weatherDisplay.showLeftPart();
+    });
+  });
+}
+
+(function main() {
+  mainLogic();
+  document.querySelector(".search-button").addEventListener("click", mainLogic);
 })();
