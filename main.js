@@ -233,3 +233,6 @@ function mainLogic() {
   mainLogic();
   document.querySelector(".search-button").addEventListener("click", mainLogic);
 })();
+
+//NOTE: Find better Icons
+//NOTE: BUtton to convert C to F
